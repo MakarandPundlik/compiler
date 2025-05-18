@@ -1,6 +1,6 @@
 import fs from "fs";
 
-const getTokens = (input) => {
+export const getTokens = (input) => {
   const tokens = [];
   let index = 0;
   while (index < input.length) {
@@ -42,18 +42,3 @@ const getTokens = (input) => {
 
   return tokens;
 };
-
-try {
-  const filePath = process.argv[2];
-  const input = fs.readFileSync(filePath, "utf-8");
-  console.log(input);
-  const tokens = getTokens(input);
-  const targetFile = `${filePath}.tokens`;
-  fs.writeFileSync(targetFile, JSON.stringify(tokens));
-} catch (error) {
-  if (error.message.indexOf("no such file or directory") !== -1) {
-    console.error(`Pleaser provide the correct input path`);
-  } else {
-    console.error(error.message);
-  }
-}
